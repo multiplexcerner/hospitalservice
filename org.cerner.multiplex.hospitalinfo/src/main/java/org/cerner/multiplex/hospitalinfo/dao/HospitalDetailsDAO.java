@@ -1,6 +1,8 @@
 package org.cerner.multiplex.hospitalinfo.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -105,5 +107,25 @@ public class HospitalDetailsDAO<Integer, Hospital> {
     public synchronized Hospital get(Integer key) {
         return map.get(key);
     }
+
+    /**
+     * Retrieve an element from the map. Because {@code null} values are not allowed,
+     * a returned value of {@code null} will always mean that the map did not contain
+     * the value. Therefore, a call to {@link #contains(Object)} which returns true
+     * will guarantee that a call to get(key) will always return a non-null value.
+     *
+     * @param key the lookup key
+     * @return the value stored under the given key, or null
+     */
+    public synchronized List<Hospital> getAll()
+    {
+        List<Hospital> hospitals = new ArrayList<>();
+        for (Map.Entry<Integer, Hospital> entry : map.entrySet())
+        {
+            hospitals.add(entry.getValue());
+        }
+        return hospitals;
+    }
+
 }
 

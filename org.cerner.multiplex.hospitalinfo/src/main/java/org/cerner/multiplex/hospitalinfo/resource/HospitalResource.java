@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class HospitalResource {
@@ -36,6 +35,12 @@ public class HospitalResource {
     {
         int key = Integer.parseInt(id);
         return ResponseEntity.status(HttpStatus.OK).body(hospitalDAO.get(key));
+    }
+
+    @GetMapping("/hospital/all")
+    ResponseEntity<List<Hospital>> get()
+    {
+        return ResponseEntity.status(HttpStatus.OK).body(hospitalDAO.getAll());
     }
 
     @PutMapping("/hospital")
