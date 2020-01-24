@@ -12,6 +12,16 @@ public class HospitalDetailsDAO<Integer, Hospital> {
     private final Map<Integer,Hospital> map = new HashMap<>();
 
 
+    /**
+     * Adds a new value to the map. If the map already contains a value
+     * at the given key, an exception is raised. If your intent
+     * is to update the value regardless of whether it is present or not,
+     * consider using the {@link #addOrUpdate(Object, Object)} method instead.
+     *
+     * @param key the lookup key
+     * @param value the value to store
+     * @throws IllegalStateException if the map already contains a value at the given key
+     */
     public synchronized void add(Integer key, Hospital value) {
         if (map.containsKey(key)) {
             throw new IllegalStateException("A value for '"+key+"' is already present.");
